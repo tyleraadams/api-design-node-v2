@@ -1,20 +1,24 @@
 import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
 
-const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    unique: true,
-    required: true
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      unique: true,
+      required: true
+    },
+    passwordHash: {
+      required: true,
+      type: String
+    }
   },
-  passwordHash: {
-    required: true,
-    type: String,
-  }
-}, {timestamps: true})
+  { timestamps: true }
+)
 
 userSchema.methods = {
   authenticate(plaintTextPassword) {
-    return bcrypt.compareSync(plainTextPword, this.password)
+    return bcrypt.compareSync(plaintTextPassword, this.password)
   },
   hashPassword(plaintTextPassword) {
     if (!plaintTextPassword) {

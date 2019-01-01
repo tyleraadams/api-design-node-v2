@@ -18,7 +18,7 @@ app.use('/docs', graphiqlExpress({ endpointURL: '/graphql' }))
 
 // catch all
 app.all('*', (req, res) => {
-  res.json({ok: true})
+  res.json({ ok: true })
 })
 
 export default app
